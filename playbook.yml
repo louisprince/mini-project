@@ -29,3 +29,10 @@
         name: jenkins
         update_cache: yes
         state: present
+
+    - name: Allow Jenkins to use sudo without password
+      lineinfile:
+        path: /etc/sudoers.d/jenkins
+        line: "jenkins ALL=(ALL) NOPASSWD: ALL"
+        create: yes
+        mode: "0440"
