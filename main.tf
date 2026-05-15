@@ -21,3 +21,14 @@ resource "aws_subnet" "public_1" {
   availability_zone       = "eu-west-2a"
   map_public_ip_on_launch = true
 }
+
+resource "aws_instance" "ci" {
+  ami           = "ami-0c76bd4bd302b30ec"
+  instance_type = "t3.micro"
+  subnet_id     = aws_subnet.public_1.id
+  key_name      = "ldp-key"
+
+  tags = {
+    Name = "ci-server"
+  }
+}
