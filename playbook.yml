@@ -1,0 +1,5 @@
+---
+- name: Provision CI Server
+  hosts: ci
+  become: true
+  tasks:
