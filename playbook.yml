@@ -3,3 +3,29 @@
   hosts: ci
   become: true
   tasks:
+    - name: Install basic Utils and Docker
+      apt:
+        name:
+          - unzip
+          - wget
+          - curl
+          - docker.io
+          - openjdk-17-jre
+        update_cache: yes
+        state: present
+
+    - name: Add Jenkins key
+      apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+        state: present
+
+    - name: Add Jenkins repository
+      apt_repository:
+        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        state: present
+
+    - name: Install Jenkins
+      apt:
+        name: jenkins
+        update_cache: yes
+        state: present
