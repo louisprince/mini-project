@@ -36,3 +36,9 @@
         line: "jenkins ALL=(ALL) NOPASSWD: ALL"
         create: yes
         mode: "0440"
+
+    - name: Add Ubuntu user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
